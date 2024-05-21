@@ -2,7 +2,14 @@
 --- MOD_NAME: Hold For Final Hand Score
 --- MOD_ID: HoldForFinalHandScore
 --- MOD_AUTHOR: [Wiwiweb]
---- MOD_DESCRIPTION: Pauses a moment for the final Chip X Mult count, and another moment for the final hand chip total. Especially noticeable on big hands that trigger flames.
+--- MOD_DESCRIPTION: <WARNING: BUGGY!> Pauses a moment for the final Chip X Mult count, and another moment for the final hand chip total. Especially noticeable on big hands that trigger flames.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+---BEWARE, THIS MOD IS BUGGY AND I UNFORTUNATELY DON'T HAVE THE TIME TO TRY AND FIX IT!
+---Known issues:
+--- * Prevents the special effects from the Anaglyph and Plasma decks.
+--- * Softlocks the game if you get a naneinf score.
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
