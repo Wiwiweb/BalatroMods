@@ -21,8 +21,16 @@ local function get_max_stake_for_deck(deck_key)
   local win_stake = get_deck_win_stake(deck_key)
   local min_stake = get_min_stake_available()
   local max_stake = math.max(win_stake+1, min_stake)
-  if G.PROFILES[G.SETTINGS.profile].all_unlocked then max_stake = 8 end
+  if G.PROFILES[G.SETTINGS.profile].all_unlocked then max_stake = get_highest_stake() end
   return max_stake
+end
+
+local function get_highest_stake()
+  local num_stakes = 0
+  for k,v in pairs(G.P_STAKES) do
+    num_stakes = num_stakes + 1
+  end
+  return num_stakes
 end
 
 local deck_stake_column_ref = G.UIDEF.deck_stake_column
@@ -33,7 +41,6 @@ function G.UIDEF.deck_stake_column(_deck_key)
   for _, node in ipairs(output.nodes) do
     if node.config.id and node.config.id <= min_stake then
       node.config.minw = 0.45
-      node.nodes[1].config.minh = 0.17
       node.nodes[1].config.minw = 0.37
     end
   end
@@ -47,7 +54,7 @@ function G.UIDEF.stake_option(_type)
 
   local max_stake = get_max_stake_for_deck(G.GAME.viewed_back.effect.center.key)
   local stake_options = {}
-  for i = 1, math.min(max_stake, 8) do
+  for i = 1, math.min(max_stake, get_highest_stake()) do
     stake_options[i] = i
   end
 
@@ -61,7 +68,7 @@ end
 function G.UIDEF.viewed_stake_option()
   G.viewed_stake = G.viewed_stake or 1
   local max_stake = get_max_stake_for_deck(G.GAME.viewed_back.effect.center.key)
-  if G.PROFILES[G.SETTINGS.profile].all_unlocked then max_stake = 8 end
+  if G.PROFILES[G.SETTINGS.profile].all_unlocked then max_stake = get_highest_stake() end
 
   G.viewed_stake = math.min(max_stake, G.viewed_stake)
   if _type ~= 'Continue' then G.PROFILES[G.SETTINGS.profile].MEMORY.stake = G.viewed_stake end
