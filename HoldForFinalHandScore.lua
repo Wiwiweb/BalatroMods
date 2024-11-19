@@ -33,7 +33,7 @@ function Back:trigger_effect(args)
       end
     }))
   end
-  return back_trigger_effects_ref(args)
+  return back_trigger_effects_ref(self, args)
 end
 
 -- Pause on hand chip total.
